@@ -477,7 +477,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _serverURL() {
     MFClient mfClient = MFClient();
     mfClient
-        .setServerUrl(serverUrl: "192.168.99.100")
+        .setServerUrl(serverUrl: "http://192.168.99.100:9080/mfp")
         .then((value) {
       print("Changed the server URL");
       mfClient.getServerUrl().then((value) {
