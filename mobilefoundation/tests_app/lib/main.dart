@@ -477,7 +477,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _serverURL() {
     MFClient mfClient = MFClient();
     mfClient
-        .setServerUrl(serverUrl: '')
+        .setServerUrl(serverUrl: "192.168.99.100")
         .then((value) {
       print("Changed the server URL");
       mfClient.getServerUrl().then((value) {
@@ -492,7 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       });
     }).catchError((error) {
-      print("Failed to set Server URL ${error}");
+      print("Failed to set Server URL ${error.errorMsg}");
       setState(() {
         _output = "Failed to set Server URL";
       });
@@ -528,7 +528,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _output = "serverURL success";
         });
     }).catchError((error) {
-      print("Failed to set Server URL ${error}");
+      print("Failed to set Server URL $error");
       setState(() {
         _output = "Failed to set Server URL";
       });

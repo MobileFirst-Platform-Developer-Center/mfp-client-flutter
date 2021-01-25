@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -40,6 +38,7 @@ class _MyAppState extends State<MyApp> {
           headerName: "MyHeader", headerValue: "MyHeaderValue");
       await client.removeGlobalHeader(headerName: "MyHeader");
       String serverUrl = await client.getServerUrl();
+      print("Server url $serverUrl");
 
       MFLogger.setLevel(level: MFLoggerLevel.TRACE);
       MFLogger logger = new MFLogger(packageName: "DART_EXAMPLE");

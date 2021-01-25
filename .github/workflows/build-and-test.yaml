@@ -20,7 +20,7 @@ jobs:
     - name: Analyze
       working-directory: ./mobilefoundation
       run: |
-        # flutter analyze
+        flutter analyze
 
     - name: Build app
       working-directory: ./mobilefoundation/example

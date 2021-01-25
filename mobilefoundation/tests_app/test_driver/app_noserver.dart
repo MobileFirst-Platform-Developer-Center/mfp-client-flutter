@@ -21,7 +21,6 @@ void main() {
     final getBalance = find.byValueKey('four');
     final logoutButton = find.byValueKey('three');
     final timeOutTest = find.byValueKey('five');
-    final timeOutTest2 = find.byValueKey('six');
     final mFResourceRequestSendAsMap =
         find.byValueKey('mFResourceRequestSendAsMap');
     final mFResourceRequestSendAsFormParameter =

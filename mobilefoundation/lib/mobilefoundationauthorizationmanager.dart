@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobilefoundation/accesstoken.dart';
-import 'package:mobilefoundation/mobilefoundationlogger.dart';
 import 'package:mobilefoundation/mobilefoundationresponse.dart';
 
 /// This class manages the OAuth interaction between the device and the authorization server.
