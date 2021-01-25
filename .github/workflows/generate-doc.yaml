@@ -1,0 +1,31 @@
+on: [push]
+name: Generate docs
+jobs:
+  build:
+    name: Generate and update doc
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '1.22.4'
+        channel: 'stable'
+    - name: Install and generate doc using dartdoc
+      working-directory: ./mobilefoundation
+      run: |
+        flutter pub global activate dartdoc
+        flutter pub global run dartdoc:dartdoc
+        if [[ -z $(git status -s) ]]
+        then
+          echo "No changes"
+        else
+          echo "Changes made, Commit needed"
+          git config user.name ${{ secrets.GH_USER }}
+          git config user.email "${{ secrets.GH_MAIL }}"
+          git add doc/
+          git commit -m "Updating docs"
+          git push "https://${{ secrets.GH_TOKEN }}@github.com/rajarahul12/flutter_package.git"
+        fi

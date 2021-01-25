@@ -1,0 +1,190 @@
+on: [pull_request]
+name: Build and Test Pipeline
+jobs:
+  build:
+    name: Build and Test
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '1.22.4'
+        channel: 'stable'
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+
+    - name: Analyze and run tests
+      working-directory: ./mobilefoundation
+      run: |
+        # flutter analyze
+        flutter test
+
+    - name: Build app
+      working-directory: ./mobilefoundation/example
+      run: |
+        flutter pub get
+        flutter build apk
+        flutter build ios --no-codesign
+
+    - name: Check if publishable
+      working-directory: ./mobilefoundation
+      run: |
+        flutter pub publish --dry-run
+
+    - name: Check any issues with doc generation
+      working-directory: ./mobilefoundation
+      run: |
+        flutter pub global activate dartdoc
+        flutter pub global run dartdoc:dartdoc
+
+    - name : Run Tests when server not running on iOS Simulator
+      working-directory: ./mobilefoundation/tests_app
+      run: |
+        xcode-select -v
+        xcrun simctl list
+        open -a /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app
+        sleep 60
+        flutter pub get
+        flutter doctor -v 
+        flutter drive --target=test_driver/app.dart --driver=test_driver/app_noserver.dart
+        killall "Simulator"
+    
+    - name: Run Tests when server not running on Android Emulator
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        target: default
+        arch: x86_64
+        profile: Nexus 6
+        script: cd ./mobilefoundation/tests_app && flutter pub get && flutter doctor -v && flutter drive --target=test_driver/app.dart --driver=test_driver/app_noserver.dart
+
+    - name: Setup MobileFirst Server using Docker
+      working-directory: ./mobilefoundation/tests_app
+      run: |
+        brew cask install docker-toolbox
+        docker-machine create --driver "virtualbox" TestApp
+        eval "$(docker-machine env TestApp)"
+        docker-machine ls
+        docker pull ibmcom/ibm-mobilefoundation-ce:latest
+        CONTIANER_ID=$(docker run -d -p 9080:9080 -p 9443:9443 -e MFPF_ANALYTICS_PROTOCOL=http -e ANALYTICS_SVC_NAME=localhost -e ANALYTICS_PORT=9080 -e MFPF_SERVER_PROTOCOL=http -e ADMIN_HOST=localhost -e MFPF_SERVER_PORT=9080 -e RUNTIME_SVC_NAME=localhost -e MFPF_ANALYTICS_RECVR_HOST=localhost ibmcom/ibm-mobilefoundation-ce)
+        docker ps
+        echo "CONTIANER_ID=${CONTIANER_ID}" >> $GITHUB_ENV
+        echo "Container ID: ${CONTIANER_ID}"
+        
+        sleep 10
+        poll=0
+
+        while [ "$poll" -lt 10 ]; do
+            poll=$(( poll + 1 ))
+            echo "Count --> $poll"
+            curl --location --request GET http://192.168.99.100:9080/mfpadmin/management-apis/2.0/diagnostic --user "admin:admin" -o output.json
+            line=$(head -n 1 output.json)
+            case $line in
+                *"html"*)
+                    echo "Mobile Foundation Admin Service is not up yet"
+                    if [ "$poll" -ge 10 ]; then
+                        echo "Mobile Foundation Server did not start"
+                        exit 1;
+                    fi
+                    sleep 20
+                    continue
+                    ;;
+            esac
+            MFPROJECT_LENGTH=$(node -pe 'JSON.parse(process.argv[1]).runningProjectStatuses.length' "$(cat output.json)")
+            echo "Output status length ---> $MFPROJECT_LENGTH"
+            if [ "$MFPROJECT_LENGTH" == "1" ]; then
+                echo "Checking status"
+                STATUS=$(node -pe 'JSON.parse(process.argv[1]).runningProjectStatuses[0].running' "$(cat output.json)")
+                if [ "$STATUS" == "true" ]; then
+                    echo "Mobile Foundation Server is UP : $STATUS"
+                    break;
+                else
+                    echo "Mobile Foundation Server is not running"
+                    if [ "$poll" -ge 10 ]; then
+                        echo "Mobile Foundation Server did not start"
+                        exit 1;
+                    fi
+                    sleep 20
+                    continue
+                fi
+            else
+                echo "No data available. Retry"
+                if [ "$poll" -ge 10 ]; then
+                    echo "Mobile Foundation Server did not start"
+                    exit 1;
+                fi
+                sleep 20
+                continue
+            fi
+        done
+
+        echo "Getting the logs"
+        docker logs ${CONTIANER_ID}
+        curl http://192.168.99.100:9080/mfp/api/az/v1/token
+
+        curl --location --request POST 'http://192.168.99.100:9080/mfpadmin/management-apis/2.0/runtimes/mfp/adapters' \
+        --user "admin:admin" \
+        --form 'adapterPath=@./adapters/UserLogin.adapter'
+
+        curl --location --request POST 'http://192.168.99.100:9080/mfpadmin/management-apis/2.0/runtimes/mfp/adapters' \
+        --user "admin:admin" \
+        --form 'adapterPath=@./adapters/ResourceAdapter.adapter'
+
+        curl --location --request POST 'http://192.168.99.100:9080/mfpadmin/management-apis/2.0/runtimes/mfp/adapters' \
+        --user "admin:admin" \
+        --form 'adapterPath=@./adapters/PinCodeAttempts.adapter'
+
+        cat <<EOF > ./registeriosconfig.json
+        {
+          "applicationKey":{
+            "version":"1.0.0",
+            "clientPlatform":"ios",
+            "bundleId":"com.example.testsApp"
+          },
+          "displayName":"RunnerTest",
+          "scopeElementMapping":{
+            "accessRestricted":"UserLogin",
+            "checkScope":""
+          }
+        }
+        EOF
+        curl -X POST "http://192.168.99.100:9080/mfpadmin/management-apis/2.0/runtimes/mfp/applications?async=false&locale=en_US" -H "Content-Type: application/json" --user "admin:admin" -H "cache-control: no-cache" -d @./registeriosconfig.json -o output.json
+        cat ./output.json
+
+        cat <<EOF > ./registerandroidconfig.json
+        {
+          "applicationKey":{
+              "version":"1.0.0",
+              "clientPlatform":"android",
+              "packageName":"com.example.tests_app"
+          },
+          "displayName":"tests_app",
+          "scopeElementMapping":{
+              "accessRestricted":"UserLogin",
+              "checkScope":""
+          }
+        }
+        EOF
+        curl -X POST "http://192.168.99.100:9080/mfpadmin/management-apis/2.0/runtimes/mfp/applications?async=false&locale=en_US" -H "Content-Type: application/json" --user "admin:admin" -H "cache-control: no-cache" -d @./registerandroidconfig.json -o output.json
+        cat ./output.json
+
+    - name : Run Tests on iOS Simulator
+      working-directory: ./mobilefoundation/tests_app
+      run: |
+        open -a /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app
+        sleep 60
+        flutter drive --target=test_driver/app.dart --driver=test_driver/app_test.dart
+        killall "Simulator"
+
+    - name: Run Tests on Android Emulator
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        target: default
+        arch: x86_64
+        profile: Nexus 6
+        script: cd ./mobilefoundation/tests_app && flutter pub get && flutter doctor -v && flutter drive --target=test_driver/app.dart --driver=test_driver/app_test.dart

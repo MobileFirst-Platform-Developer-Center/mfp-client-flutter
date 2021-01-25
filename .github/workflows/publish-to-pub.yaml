@@ -1,0 +1,63 @@
+name: Publish package to pub.dev
+on: 
+  workflow_dispatch:
+    branches:
+    - master
+    inputs:
+      changeLog:
+        description: "Content for the ChangeLog file"
+        required: false
+        default: "Version Update"
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '1.22.4'
+        channel: 'stable'
+    - name: Set version as env variable
+      run: |
+        echo "VERSION=8.0.$(date +'%Y%m%d%H')" >> $GITHUB_ENV
+    - name: Echo version number
+      run: echo $NOW
+    - name: Update version
+      working-directory: ./mobilefoundation
+      run: |
+        flutter pub global activate cider
+        flutter pub global run cider:cider version $VERSION
+    - name: Setup credentials
+      working-directory: ./mobilefoundation
+      run: |
+        mkdir -p ~/.pub-cache
+        cat <<EOF > ~/.pub-cache/credentials.json
+        {
+          "accessToken":"${{ secrets.OAUTH_ACCESS_TOKEN }}",
+          "refreshToken":"${{ secrets.OAUTH_REFRESH_TOKEN }}",
+          "tokenEndpoint":"https://accounts.google.com/o/oauth2/token",
+          "scopes": [ "openid", "https://www.googleapis.com/auth/userinfo.email" ],
+          "expiration": 1570721159347
+        }
+        EOF
+    - name: Publish package
+      working-directory: ./mobilefoundation
+      run: pub publish -f
+    - name: Update version
+      working-directory: ./mobilefoundation
+      run: |
+        echo "Updating the change log"
+        echo -e "\n## ${VERSION}" >> CHANGELOG.md
+        echo -e "\n* ${{ github.event.inputs.changeLog }}" >> CHANGELOG.md
+        if [[ -z $(git status -s) ]]
+        then
+          echo "No changes"
+        else
+          echo "Changes made, Commit needed"
+          git config user.name ${{ secrets.GH_USER }}
+          git config user.email "${{ secrets.GH_MAIL }}"
+          git branch
+          git add .
+          git commit -m "Updating version to $VERSION"
+          git push "https://${{ secrets.GH_TOKEN }}@github.com/rajarahul12/flutter_package.git" HEAD:master
+        fi
