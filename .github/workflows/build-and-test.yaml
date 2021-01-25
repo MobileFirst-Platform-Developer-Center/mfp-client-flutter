@@ -34,12 +34,6 @@ jobs:
       run: |
         flutter pub publish --dry-run
 
-    - name: Check any issues with doc generation
-      working-directory: ./mobilefoundation
-      run: |
-        flutter pub global activate dartdoc
-        flutter pub global run dartdoc:dartdoc
-
     - name : Run Tests when server not running on iOS Simulator
       working-directory: ./mobilefoundation/tests_app
       run: |
@@ -187,3 +181,9 @@ jobs:
         arch: x86_64
         profile: Nexus 6
         script: cd ./mobilefoundation/tests_app && flutter pub get && flutter doctor -v && flutter drive --target=test_driver/app.dart --driver=test_driver/app_test.dart
+
+    - name: Check any issues with doc generation
+      working-directory: ./mobilefoundation
+      run: |
+        flutter pub global activate dartdoc
+        flutter pub global run dartdoc:dartdoc
