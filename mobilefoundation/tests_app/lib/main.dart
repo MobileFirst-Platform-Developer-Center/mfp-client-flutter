@@ -190,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
       shouldRegister = true;
     });
     MFResourceRequest request = new MFResourceRequest(
-        "/adapters/ResourceAdapter/balance", MFResourceRequest.GET);
+        "/adapters/ResourceAdapter/balance", MFResourceRequest.GET, timeout: 15000);
     request.send().then((response) {
       print(
           "MFResourceRequest Call Success. Response: " + response.responseText);
@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
     mapJson['Header'] = 'Test';
     MFResourceRequest request = new MFResourceRequest(
         "adapters/ResourceAdapter/wlresreqwithsjsontest",
-        MFResourceRequest.POST);
+        MFResourceRequest.POST, timeout: 15000);
     request.send(json: mapJson).then((response) {
       print('WLRR Response' + response.responseText);
 
@@ -254,20 +254,20 @@ class _MyHomePageState extends State<MyHomePage> {
     formParameter['email'] = 'John@gmail.com';
     MFResourceRequest request = new MFResourceRequest(
         "adapters/ResourceAdapter/wlresreqwithformparamtest",
-        MFResourceRequest.POST);
+        MFResourceRequest.POST, timeout: 15000);
     request.send(formParameters: formParameter).then((response) {
       print('MFResourceRequest Response' + response.responseText);
       setState(() {
         if (response.responseText.contains(formParameter['Name'])) {
           _output = "Got Response Send As Form Parameter";
         } else {
-          _output = "MFResourceRequest Response Send As Form Parameter Failed";
+          _output = "Send As Form Parameter Failed";
         }
       });
     }).catchError((error) {
       print("MFResourceRequest Call Failed. Error: " + error.errorMsg);
       setState(() {
-        _output = "MFResourceRequest Response Send As Form Parameter Failed";
+        _output = "Send As Form Parameter Failed";
       });
     });
   }
@@ -276,20 +276,20 @@ class _MyHomePageState extends State<MyHomePage> {
     String requestBody = "Request";
     MFResourceRequest request = new MFResourceRequest(
         "adapters/ResourceAdapter/wlresreqwithstringtest",
-        MFResourceRequest.POST);
+        MFResourceRequest.POST, timeout: 15000);
     request.send(requestBody: requestBody).then((response) {
       print('MFResourceRequest Response' + response.responseText);
       setState(() {
         if (response.responseText.contains(requestBody)) {
           _output = "Got Response Send As String";
         } else {
-          _output = "MFResourceRequest Response Send As String Failed";
+          _output = "Send As String Failed";
         }
       });
     }).catchError((error) {
       print("MFResourceRequest Call Failed. Error: " + error.errorMsg);
       setState(() {
-        _output = "MFResourceRequest Response Send As String Failed";
+        _output = "Send As String Failed";
       });
     });
   }
@@ -298,7 +298,7 @@ class _MyHomePageState extends State<MyHomePage> {
     client.addGlobalHeader(
         headerName: "Resource", headerValue: "AddGlobalHeader");
     MFResourceRequest mfResourceRequest = new MFResourceRequest(
-        "adapters/ResourceAdapter/WlClientTest", MFResourceRequest.GET);
+        "adapters/ResourceAdapter/WlClientTest", MFResourceRequest.GET, timeout: 15000);
     mfResourceRequest.send().then((response) {
       print(
           "MFResourceRequest Response For addGlobalHeader Custom Header Test" +
@@ -310,7 +310,7 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         setState(() {
           _output =
-              "MFResourceRequest Call Failed For addGlobalHeader Custom Header Test";
+              "addGlobalHeader Custom Header Test";
         });
       }
     }).catchError((error) {
@@ -319,7 +319,7 @@ class _MyHomePageState extends State<MyHomePage> {
               error.errorMsg);
       setState(() {
         _output =
-            "MFResourceRequest Call Failed For addGlobalHeader Custom Header Test";
+            "addGlobalHeader Custom Header Test";
       });
     });
   }
@@ -329,7 +329,7 @@ class _MyHomePageState extends State<MyHomePage> {
         headerName: "Resource", headerValue: "AddGlobalHeader");
     client.removeGlobalHeader(headerName: "Resource");
     MFResourceRequest mfResourceRequest = new MFResourceRequest(
-        "adapters/ResourceAdapter/WlClientTest", MFResourceRequest.GET);
+        "adapters/ResourceAdapter/WlClientTest", MFResourceRequest.GET, timeout: 15000);
     mfResourceRequest.send().then((response) {
       print("MFResourceRequest Response For addGlobalHeader and Remove Test" +
           response.responseText);
@@ -341,7 +341,7 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         setState(() {
           _output =
-              "MFResourceRequest Call Failed For addGlobalHeader and Remove Test";
+              "addGlobalHeader and Remove Test";
         });
       }
     }).catchError((error) {
@@ -350,14 +350,14 @@ class _MyHomePageState extends State<MyHomePage> {
               error.errorMsg);
       setState(() {
         _output =
-            "MFResourceRequest Call Failed For addGlobalHeader and Remove Test";
+            "addGlobalHeader and Remove Test";
       });
     });
   }
 
   _mFResourceRequestSetQueryParameter() {
     MFResourceRequest mfResourceRequest = new MFResourceRequest(
-        "adapters/ResourceAdapter/WlClientTest", MFResourceRequest.GET);
+        "adapters/ResourceAdapter/WlClientTest", MFResourceRequest.GET, timeout: 15000);
     mfResourceRequest.setQueryParameters(
         paramName: "Resource", paramValue: "AddGlobalHeader");
     mfResourceRequest.send().then((response) {
@@ -371,7 +371,7 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         } else {
           setState(() {
-            _output = "MFResourceRequest Call Failed For Set Query Param Test";
+            _output = "Failed Set Query Param Test";
           });
         }
       }).catchError((error) {
@@ -385,7 +385,7 @@ class _MyHomePageState extends State<MyHomePage> {
       print("MFResourceRequest Call Failed For Set Query Param Test. Error: " +
           error.errorMsg);
       setState(() {
-        _output = "MFResourceRequest Call Failed For Set Query Param Test";
+        _output = "Failed Set Query Param Test";
       });
     });
   }

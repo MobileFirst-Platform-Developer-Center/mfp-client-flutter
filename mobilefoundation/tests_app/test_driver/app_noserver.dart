@@ -119,12 +119,6 @@ void main() {
       await driver.waitFor(find.text("Request timed out"));
     });
 
-    test('timeOut 30sec', () async {
-      await driver.tap(timeOutTest2);
-
-      await driver.waitFor(find.text("Request timed out"));
-    });
-
     test('MFResourceRequestSendAsMap', () async {
       await driver.tap(mFResourceRequestSendAsMap);
 
@@ -137,8 +131,7 @@ void main() {
 
       await driver.tap(mFResourceRequestSendAsFormParameter);
 
-      await driver.waitFor(find
-          .text("MFResourceRequest Response Send As Form Parameter Failed"));
+      await driver.waitFor(find.text("Send As Form Parameter Failed"));
     });
 
     test('MFResourceRequestSendAsString', () async {
@@ -148,7 +141,7 @@ void main() {
       await driver.tap(mFResourceRequestSendAsString);
 
       await driver.waitFor(
-          find.text("MFResourceRequest Response Send As String Failed"));
+          find.text("Send As String Failed"));
     });
 
     test('MFResourceRequestaddGlobalHeader', () async {
@@ -157,8 +150,7 @@ void main() {
 
       await driver.tap(mFResourceRequestaddGlobalHeader);
 
-      await driver.waitFor(find.text(
-          "MFResourceRequest Call Failed For addGlobalHeader Custom Header Test"));
+      await driver.waitFor(find.text("addGlobalHeader Custom Header Test"));
     });
 
     test('MFResourceRequestaddGlobalHeaderAndRemove', () async {
@@ -168,7 +160,7 @@ void main() {
       await driver.tap(mFResourceRequestaddGlobalHeaderAndRemove);
 
       await driver.waitFor(find.text(
-          "MFResourceRequest Call Failed For addGlobalHeader and Remove Test"));
+          "addGlobalHeader and Remove Test"));
     });
     test('MFResourceRequestSetQueryParameter', () async {
       await driver.scrollUntilVisible(
@@ -177,7 +169,7 @@ void main() {
       await driver.tap(mFResourceRequestSetQueryParameter);
 
       await driver.waitFor(
-          find.text("MFResourceRequest Call Failed For Set Query Param Test"));
+          find.text("Failed Set Query Param Test"));
     });
     test('MFResourceRequestGetUrl', () async {
       await driver.scrollUntilVisible(listFinder, mFResourceRequestGetUrl);
