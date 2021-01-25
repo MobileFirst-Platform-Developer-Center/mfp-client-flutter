@@ -1,0 +1,11 @@
+{
+  "applicationKey":{
+      "version":"1.0.0",
+      "clientPlatform":"ios",
+      "bundleId":"com.example.testsApp"
+  },
+  "displayName":"RunnerTest",
+  "scopeElementMapping":{
+    "accessRestricted":"UserLogin"
+ }
+}

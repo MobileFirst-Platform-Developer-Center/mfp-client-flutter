@@ -1,0 +1,543 @@
+{
+  "methodMap": [
+    {
+      "methodName": "addGlobalHeader",
+      "arguments": [
+        {
+          "argumentName": "headerName",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "headerValue",
+          "argumentType": "String"
+        }
+      ]
+    },
+    {
+      "methodName": "removeGlobalHeader",
+      "arguments": [
+        {
+          "argumentName": "headerName",
+          "argumentType": "String"
+        }
+      ]
+    },
+    {
+      "methodName": "setServerUrl",
+      "arguments": [
+        {
+          "argumentName": "serverUrl",
+          "argumentType": "String"
+        }
+      ]
+    },
+    {
+      "methodName": "getServerUrl",
+      "arguments": []
+    },
+    { 
+        "methodName" : "setDeviceDisplayName",
+        "arguments" : [
+            {
+            "argumentName" : "deviceDisplayName" ,
+            "argumentType" : "String"
+        }
+        ]
+    },
+    { 
+        "methodName" : "getDeviceDisplayName",
+        "arguments" : [
+        ]
+    },
+    { 
+        "methodName" : "setHeartbeatInterval",
+        "arguments" : [
+            {
+            "argumentName" : "heartbeatIntervalInSeconds",
+            "argumentType" : "int"
+        }
+        ]
+    },
+    { 
+        "methodName" : "pinTrustedCertificatesPublicKey",
+        "arguments" : [
+            {
+            "argumentName" : "certificateFileNames",
+            "argumentType" : "List<String>"
+        }
+        ]
+    },
+     { 
+        "methodName" : "registerChallengeHandler",
+        "arguments" : [
+           {
+           "argumentName": "securityCheckName",
+           "argumentType": "String"
+        }
+        ]
+    },
+    { 
+        "methodName" : "submitChallengeAnswer",
+        "arguments" : [
+           {
+           "argumentName": "securityCheckName",
+           "argumentType": "String"
+        }, 
+        {
+           "argumentName": "answer",
+           "argumentType": "HashMap<String, String>()"
+        }
+        ]
+    },
+    { 
+      "methodName" : "cancelChallenge",
+      "arguments" : [
+          {
+           "argumentName": "securityCheckName",
+           "argumentType": "String"
+         }
+      ]
+    },
+    {
+      "methodName": "obtainAccessToken",
+      "arguments": [
+        {
+          "argumentName": "scope",
+          "argumentType": "String"
+        }
+      ]
+    },
+    {
+      "methodName": "login",
+      "arguments" : [
+        {
+          "argumentName" : "securityCheck" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "credentials",
+          "argumentType" : "HashMap<String, String>()"
+        }
+      ]
+    },
+    {
+      "methodName": "logout",
+      "arguments" : [
+        {
+          "argumentName" : "securityCheck" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "setLoginTimeOut" ,
+      "arguments" : [
+        {
+          "argumentName" : "timeOut" ,
+          "argumentType" : "int"
+        }
+      ]
+    },
+    {
+      "methodName" : "init" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "url" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "timeout" ,
+          "argumentType" : "int"
+        },
+        {
+          "argumentName" : "scope" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "send" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "sendWithJSON" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "json" ,
+          "argumentType" : "HashMap<String, String>"
+        }
+      ]
+    },
+    {
+      "methodName" : "sendWithFormParameters" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "parameters" ,
+          "argumentType" : "HashMap<String, String>"
+        }
+      ]
+    },
+    {
+      "methodName" : "sendWithRequestBody" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "body" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "getMethod" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "addHeader" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "headerName" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "headerValue" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "setQueryParameters" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "paramName" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "paramValue" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "getQueryParameters" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "getQueryString" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "getAllHeaders" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "getHeaders" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "headerName" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "setHeaders" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "headers" ,
+          "argumentType" : "HashMap<String, List<String>>"
+        }
+      ]
+    },
+    {
+      "methodName" : "removeHeaders" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "headerName" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "setTimeout" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        },
+        {
+          "argumentName" : "timeout" ,
+          "argumentType" : "int"
+        }
+      ]
+    },
+    {
+      "methodName" : "getTimeout" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName" : "getUrl" ,
+      "arguments" : [
+        {
+          "argumentName" : "uuid" ,
+          "argumentType" : "String"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.setLevel",
+      "arguments": [
+        {
+          "argumentName": "level",
+          "argumentType": "String"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.getLevel",
+      "arguments": []
+    },
+    {
+      "methodName": "Logger.updateConfigFromServer",
+      "arguments": []
+    },
+    {
+      "methodName": "Logger.send",
+      "arguments": []
+    },
+    {
+      "methodName": "Logger.setCapture",
+      "arguments": [
+        {
+          "argumentName": "flag",
+          "argumentType": "boolean"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.getCapture",
+      "arguments": []
+    },
+    {
+      "methodName": "Logger.setMaxFileSize",
+      "arguments": [
+        {
+          "argumentName": "bytes",
+          "argumentType": "int"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.getMaxFileSize",
+      "arguments": []
+    },
+    {
+      "methodName": "Logger.enter",
+      "arguments": [
+        {
+          "argumentName": "className",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "methodName",
+          "argumentType": "String"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.exit",
+      "arguments": [
+        {
+          "argumentName": "className",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "methodName",
+          "argumentType": "String"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.trace",
+      "arguments": [
+        {
+          "argumentName": "packageName",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "message",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "metadata",
+          "argumentType": "Map"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.debug",
+      "arguments": [
+        {
+          "argumentName": "packageName",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "message",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "metadata",
+          "argumentType": "Map"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.log",
+      "arguments": [
+        {
+          "argumentName": "packageName",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "message",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "metadata",
+          "argumentType": "Map"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.info",
+      "arguments": [
+        {
+          "argumentName": "packageName",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "message",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "metadata",
+          "argumentType": "Map"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.warn",
+      "arguments": [
+        {
+          "argumentName": "packageName",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "message",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "metadata",
+          "argumentType": "Map"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.error",
+      "arguments": [
+        {
+          "argumentName": "packageName",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "message",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "metadata",
+          "argumentType": "Map"
+        }
+      ]
+    },
+    {
+      "methodName": "Logger.fatal",
+      "arguments": [
+        {
+          "argumentName": "packageName",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "message",
+          "argumentType": "String"
+        },
+        {
+          "argumentName": "metadata",
+          "argumentType": "Map"
+        }
+      ]
+    }
+  ]
+}
