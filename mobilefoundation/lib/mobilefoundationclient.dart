@@ -91,11 +91,10 @@ class MFClient {
       {@required String deviceDisplayName}) async {
     final dynamic response = await _channel.invokeMethod(WLCLIENT_SETDEVICE_DISPLAYNAME,
         <String, dynamic>{DEVICE_DISPLAYNAME: deviceDisplayName});
-    final MFResponse mfResponse = MFResponse(mfResponse: response);
-    if ((mfResponse.errorMsg?.isEmpty ?? true) ||
-        (mfResponse.errorCode?.isEmpty ?? true)) {
-      return mfResponse;
-    } else {
+        if(response is String){
+      return response;
+    }else{
+      final MFResponse mfResponse = MFResponse(mfResponse: response);
       throw mfResponse;
     }
   }
@@ -131,8 +130,15 @@ class MFClient {
   /// The certificates must be in DER format. When multiple certificates are pinned, a secured call is checked for a match with any one of the certificates
   Future<void> pinTrustedCertificatesPublicKey(
       {@required List<String> certificateFileNames}) async {
-    return _channel.invokeMethod(WLCLIENT_CERTIFICATE_PINNING,
+    final Map response = await _channel.invokeMethod(WLCLIENT_CERTIFICATE_PINNING,
         <String, dynamic>{CERTIFICATE_FILENAMES: certificateFileNames});
+    final MFResponse mfResponse = MFResponse(mfResponse: response);
+    if ((mfResponse.errorMsg?.isEmpty ?? true) ||
+        (mfResponse.errorCode?.isEmpty ?? true)) {
+      return mfResponse;
+    } else {
+      throw mfResponse;
+    }
   }
 
   /// Register a security check challenge handler [challengeHandler] to handle the challenges recieved for a given security check.

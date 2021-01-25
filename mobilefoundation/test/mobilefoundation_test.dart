@@ -17,7 +17,4 @@ void main() {
     channel.setMockMethodCallHandler(null);
   });
 
-  test('getPlatformVersion', () async {
-    expect(await Mobilefoundation.platformVersion, '42');
-  });
 }

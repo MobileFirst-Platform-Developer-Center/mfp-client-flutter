@@ -64,9 +64,11 @@ public class WLClientMethodHandler {
             break
         case Methods.SETSERVERURL:
             if let args = call.arguments as? [String: Any],
-                let serverURL = args[Arguments.SERVER_URL] as? URL
+                let serverURL = args[Arguments.SERVER_URL] as? NSString
             {
-                WLClient.sharedInstance()?.setServerUrl(serverURL)
+                let serverURLString : NSString = serverURL.addingPercentEscapes(using: String.Encoding.utf8.rawValue)! as NSString
+                let finalURL : NSURL = NSURL(string: serverURLString as String)!
+                WLClient.sharedInstance()?.setServerUrl(finalURL as URL)
                 result(nil)
             } else {
                 result(FlutterError(code: MFConstants.ERR_INCORRECT_ARGS_CODE, message: MFConstants.ERR_INCORRECT_ARGS_MESSAGE, details: nil))
@@ -89,7 +91,7 @@ public class WLClientMethodHandler {
                         return;
                     }
                     else{
-                        result(nil);
+                        result(displayName);
                     }
                     
                 } )
@@ -131,12 +133,23 @@ public class WLClientMethodHandler {
             if let args = call.arguments as? [String: Any],
                 let certificates = args[Arguments.CERTIFICATE_FILENAMES] as? Array<String>
             {
-                if(certificates.count == 1){
-                    WLClient.sharedInstance()?.pinTrustedCertificatePublicKey(fromFile: certificates[0]);
-                } else{
-                    WLClient.sharedInstance()?.pinTrustedCertificatePublicKey(fromFiles: certificates);
-                }
-                result(nil)
+                 do  {
+                     try ObjCExceptionCacher.catchException{
+                         if(certificates.count == 1){
+                             WLClient.sharedInstance()?.pinTrustedCertificatePublicKey(fromFile: certificates[0]);
+                         } else{
+                             WLClient.sharedInstance()?.pinTrustedCertificatePublicKey(fromFiles: certificates);
+                         }
+                        result(nil);
+                     }
+                 }
+                 catch {
+                    let mfResponse = NSMutableDictionary();
+                    mfResponse.setValue(String ((error as NSError).code), forKey: Arguments.ERROR_CODE);
+                    mfResponse.setValue((error as NSError).localizedDescription, forKey: Arguments.ERROR_MSG)
+                    result(mfResponse);
+                 }
+                
             } else{
                 result(FlutterError(code: MFConstants.ERR_INCORRECT_ARGS_CODE, message: MFConstants.ERR_INCORRECT_ARGS_MESSAGE, details: nil))
             }

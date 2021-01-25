@@ -219,7 +219,7 @@ public class WLResourceRequestMethodHandler implements MethodChannel.MethodCallH
                     }
                     map.put(key, value);
                 }
-            } catch (JSONException ex) {
+            } catch (Exception ex) {
                 // Do nothing and fail silently
             }
             return map;

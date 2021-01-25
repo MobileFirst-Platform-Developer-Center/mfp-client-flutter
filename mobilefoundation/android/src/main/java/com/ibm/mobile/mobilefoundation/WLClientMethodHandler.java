@@ -167,14 +167,14 @@ public class WLClientMethodHandler implements MethodChannel.MethodCallHandler {
         }
     }
 
-    private void setDeviceDisplayName(String deviceDisplayName, final MethodChannel.Result result) {
+    private void setDeviceDisplayName(final String deviceDisplayName, final MethodChannel.Result result) {
         wlClient.setDeviceDisplayName(deviceDisplayName, new WLRequestListener() {
             @Override
             public void onSuccess(final WLResponse wlResponse) {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        result.success(wlResponse.getResponseText());
+                        result.success(deviceDisplayName);
                     }
                 });
             }
@@ -184,7 +184,10 @@ public class WLClientMethodHandler implements MethodChannel.MethodCallHandler {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        result.error(wlFailResponse.getErrorStatusCode(), wlFailResponse.getErrorMsg(), wlFailResponse.toString());
+                        Map<String, Object> mfFailResponse = new HashMap();
+                        mfFailResponse.put(Arguments.ERROR_CODE, wlFailResponse.getErrorStatusCode());
+                        mfFailResponse.put(Arguments.ERROR_MSG, wlFailResponse.getErrorMsg());
+                        result.success(mfFailResponse);
                     }
                 });
             }
@@ -209,7 +212,10 @@ public class WLClientMethodHandler implements MethodChannel.MethodCallHandler {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        result.error(wlFailResponse.getErrorStatusCode(), wlFailResponse.getErrorMsg(), wlFailResponse.toString());
+                        Map<String, Object> mfFailResponse = new HashMap();
+                        mfFailResponse.put(Arguments.ERROR_CODE, wlFailResponse.getErrorStatusCode());
+                        mfFailResponse.put(Arguments.ERROR_MSG, wlFailResponse.getErrorMsg());
+                        result.success(mfFailResponse);
                     }
                 });
             }
@@ -232,7 +238,10 @@ public class WLClientMethodHandler implements MethodChannel.MethodCallHandler {
                 }
             }
         } catch (Exception e) {
-            result.error("pinTrustedCertificatesPublicKey", "Certificate pinning error :" + e.getMessage(), null);
+            Map<String,Object> mfFailResponse = new HashMap();
+            mfFailResponse.put(Arguments.ERROR_MSG, e.getMessage());
+            mfFailResponse.put(Arguments.ERROR_CODE, MFConstants.ERR_INVALID_CERT);
+            result.success(mfFailResponse);
         }
     }
 
@@ -259,5 +268,7 @@ public class WLClientMethodHandler implements MethodChannel.MethodCallHandler {
         public static final String CERTIFICATE_FILENAMES = "certificateFileNames";
         public static final String SECURITYCHECK_NAME = "securityCheckName";
         public static final String ANSWER = "answer";
+        public static final String ERROR_CODE = "errorCode";
+        public static final String ERROR_MSG  = "errorMsg";
     }
 }
