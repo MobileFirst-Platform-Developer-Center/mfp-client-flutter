@@ -492,7 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       });
     }).catchError((error) {
-      print("Failed to set Server URL ${error.errorMsg}");
+      print("Failed to set Server URL ${error}");
       setState(() {
         _output = "Failed to set Server URL";
       });

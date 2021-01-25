@@ -211,13 +211,6 @@ void main() {
       await driver.waitFor(find.text("Got 404"));
     });
 
-    test('set and get server url', () async {
-      await driver.scrollUntilVisible(listFinder, serverUrl);
-      await driver.tap(serverUrl);
-
-      await driver.waitFor(find.text("serverURL success"));
-    });
-
     test('cert pinning', () async {
       await driver.scrollUntilVisible(listFinder, certPinning);
       await driver.tap(certPinning);
