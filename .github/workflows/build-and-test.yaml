@@ -17,11 +17,10 @@ jobs:
       with:
         node-version: '12'
 
-    - name: Analyze and run tests
+    - name: Analyze
       working-directory: ./mobilefoundation
       run: |
         # flutter analyze
-        flutter test
 
     - name: Build app
       working-directory: ./mobilefoundation/example
