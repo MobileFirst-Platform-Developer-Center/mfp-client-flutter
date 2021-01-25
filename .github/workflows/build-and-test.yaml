@@ -50,10 +50,10 @@ jobs:
         profile: Nexus 6
         script: cd ./mobilefoundation/tests_app && flutter pub get && flutter doctor -v && flutter drive --target=test_driver/app.dart --driver=test_driver/app_noserver.dart
 
-    - name: Analyze
-      working-directory: ./mobilefoundation
-      run: |
-        flutter analyze
+    # - name: Analyze
+    #   working-directory: ./mobilefoundation
+    #   run: |
+    #     flutter analyze
 
     - name: Setup MobileFirst Server using Docker
       working-directory: ./mobilefoundation/tests_app
