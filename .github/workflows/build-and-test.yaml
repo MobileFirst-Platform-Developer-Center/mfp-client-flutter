@@ -17,10 +17,25 @@ jobs:
       with:
         node-version: '12'
 
-    - name: Build app
+    - name: Pub get - Example
       working-directory: ./mobilefoundation/example
       run: |
         flutter pub get
+    
+    - name: Pub get - Test App
+      working-directory: ./mobilefoundation/tests_app
+      run: |
+        flutter pub get
+    
+    - name: Analyze MF SDK
+      working-directory: ./mobilefoundation
+      run: |
+        flutter pub get
+        flutter analyze
+
+    - name: Build app
+      working-directory: ./mobilefoundation/example
+      run: |
         flutter build apk
         flutter build ios --no-codesign
 
@@ -49,11 +64,6 @@ jobs:
         arch: x86_64
         profile: Nexus 6
         script: cd ./mobilefoundation/tests_app && flutter pub get && flutter doctor -v && flutter drive --target=test_driver/app.dart --driver=test_driver/app_noserver.dart
-
-    # - name: Analyze
-    #   working-directory: ./mobilefoundation
-    #   run: |
-    #     flutter analyze
 
     - name: Setup MobileFirst Server using Docker
       working-directory: ./mobilefoundation/tests_app

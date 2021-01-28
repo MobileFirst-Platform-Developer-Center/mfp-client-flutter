@@ -18,6 +18,7 @@ jobs:
       run: |
         flutter pub global activate dartdoc
         flutter pub global run dartdoc:dartdoc
+        git status
         if [[ -z $(git status -s) ]]
         then
           echo "No changes"
@@ -27,5 +28,5 @@ jobs:
           git config user.email "${{ secrets.GH_MAIL }}"
           git add doc/
           git commit -m "Updating docs"
-          git push "https://${{ secrets.GH_TOKEN }}@github.com/rajarahul12/flutter_package.git"
+          git push "https://${{ secrets.GH_TOKEN }}@github.com/MobileFirst-Platform-Developer-Center/mfp-client-flutter.git"
         fi

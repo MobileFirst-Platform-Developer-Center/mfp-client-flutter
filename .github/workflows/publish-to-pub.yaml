@@ -59,5 +59,5 @@ jobs:
           git branch
           git add .
           git commit -m "Updating version to $VERSION"
-          git push "https://${{ secrets.GH_TOKEN }}@github.com/rajarahul12/flutter_package.git" HEAD:master
+          git push "https://${{ secrets.GH_TOKEN }}@github.com/MobileFirst-Platform-Developer-Center/mfp-client-flutter.git" HEAD:master
         fi
