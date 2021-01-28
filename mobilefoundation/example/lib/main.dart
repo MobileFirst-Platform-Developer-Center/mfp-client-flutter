@@ -2,87 +2,148 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:mobilefoundation/mobilefoundationauthorizationmanager.dart';
-import 'package:mobilefoundation/mobilefoundationclient.dart';
-import 'package:mobilefoundation/mobilefoundationresourcerequest.dart';
-import 'package:mobilefoundation/mobilefoundationlogger.dart';
+import 'package:mobilefoundation/authorization_manager.dart';
+import 'package:mobilefoundation/client.dart';
+import 'package:mobilefoundation/resource_request.dart';
+import 'package:mobilefoundation/logger.dart';
 import 'package:mobilefoundation_example/userLoginChallengeHandler.dart';
+import './pages/BestBankRoot.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(RootApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      MFClient client = new MFClient();
-      UserLoginChallengeHandler ch = new UserLoginChallengeHandler();
-      client.registerChallengeHandler(challengeHandler: ch);
-      await client.addGlobalHeader(
-          headerName: "MyHeader", headerValue: "MyHeaderValue");
-      await client.removeGlobalHeader(headerName: "MyHeader");
-      String serverUrl = await client.getServerUrl();
-      print("Server url $serverUrl");
-
-      MFLogger.setLevel(level: MFLoggerLevel.TRACE);
-      MFLogger logger = new MFLogger(packageName: "DART_EXAMPLE");
-      logger.trace(message: "TEST LOG ---->");
-
-      MFAuthorizationManager authManager = new MFAuthorizationManager();
-      authManager.obtainAccessToken().then((accessToken) {
-        print("Token is ----> " + accessToken.value);
-        platformVersion = accessToken.value;
-
-        setState(() {
-          _platformVersion = platformVersion;
-        });
-      }).catchError((error) => print("Error in obtain access token"));
-      print("obtain accesstoken call complete ");
-
-      MFResourceRequest request = new MFResourceRequest("adapters/ResourceAdapter/publicData", MFResourceRequest.GET);
-      request.send().then((response) {
-       print("MFResourceRequest Call Success. Response: " + response.responseText);
-      }).catchError((error) {
-        print("MFResourceRequest Call Failed. Error: " + error.errorMsg);
-      });
-     print("MFResourceRequest call complete ");
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-  }
-
+class RootApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
-      ),
+      home: BestBankRoot(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatefulWidget {
+//   @override
+//   _MyAppState createState() => _MyAppState();
+// }
+
+// class _MyAppState extends State<MyApp> {
+//   String _result = '';
+
+//   void _obtainAccessToken() {
+//     MFAuthorizationManager authManager = new MFAuthorizationManager();
+//     authManager.obtainAccessToken().then((accessToken) {
+//       print("Token is ----> " + accessToken.value);
+//       setState(() {
+//         _result = "Successfully received token";
+//       });
+//     }).catchError((error) {
+//       print("Error in obtain access token. Reason: " + error.toString());
+//       setState(() {
+//         _result = "Failed to fetch token";
+//       });
+//     });
+//   }
+
+//   void _getServerUrl() {
+//     MFClient client = new MFClient();
+//     client
+//         .getServerUrl()
+//         .then((value) => setState(() {
+//               _result = value;
+//             }))
+//         .catchError((onError) => setState(() {
+//               _result = "Failed to get server url";
+//             }));
+//   }
+
+//   void _addGlobalHeader() {
+//     MFClient client = new MFClient();
+//     client
+//         .addGlobalHeader(headerName: "MyHeader", headerValue: "MyHeaderValue")
+//         .then((value) => setState(() {
+//               _result = "Success";
+//             }));
+//   }
+
+//   void _removeGlobalHeader() {
+//     MFClient client = new MFClient();
+//     client
+//         .removeGlobalHeader(headerName: "MyHeader")
+//         .then((value) => setState(() {
+//               _result = "Success";
+//             }));
+//   }
+
+//   void _wlResourceRequestSend() {
+//     MFResourceRequest request = new MFResourceRequest(
+//         "adapters/ResourceAdapter/publicData", MFResourceRequest.GET);
+//     request.send().then((response) {
+//       print(
+//           "MFResourceRequest Call Success. Response: " + response.responseText);
+//       setState(() {
+//         _result = "Success. \n" + response.responseText;
+//       });
+//     }).catchError((error) {
+//       print("MFResourceRequest Call Failed. Error: " + error.errorMsg);
+//       setState(() {
+//         _result = "Failed";
+//       });
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//           appBar: AppBar(
+//             title: const Text('IBM Mobile Foundation'),
+//           ),
+//           body: Container(
+//             padding: EdgeInsets.all(10),
+//             child: Column(children: [
+//               Expanded(
+//                   flex: 3,
+//                   child: ListView(
+//                     children: [
+//                       ElevatedButton(
+//                         onPressed: _obtainAccessToken,
+//                         child: Text('Obtain Access Token'),
+//                       ),
+//                       ElevatedButton(
+//                         onPressed: _getServerUrl,
+//                         child: Text('Get Server URL'),
+//                       ),
+//                       ElevatedButton(
+//                         onPressed: _addGlobalHeader,
+//                         child: Text('Add Global Header'),
+//                       ),
+//                       ElevatedButton(
+//                         onPressed: _removeGlobalHeader,
+//                         child: Text('Remove Global Header'),
+//                       ),
+//                       ElevatedButton(
+//                         onPressed: _wlResourceRequestSend,
+//                         child: Text('Resource Request Send'),
+//                       ),
+//                     ],
+//                   )),
+//               Padding(padding: EdgeInsets.all(10)),
+//               Expanded(child: Text('Result:')),
+//               Padding(padding: EdgeInsets.all(10)),
+//               Expanded(
+//                   child: Text(
+//                 '$_result',
+//                 style: TextStyle(
+//                     backgroundColor: Colors.black,
+//                     color: Colors.green,
+//                     fontSize: 24),
+//               ))
+//             ]),
+//           )),
+//     );
+//   }
+// }

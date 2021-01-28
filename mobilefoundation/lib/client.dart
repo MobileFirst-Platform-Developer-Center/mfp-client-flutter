@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mobilefoundation/mobilefoundationresponse.dart';
-import 'package:mobilefoundation/securitycheckchallengehander.dart';
+import 'package:mobilefoundation/mobilefoundation_response.dart';
+import 'package:mobilefoundation/security_check_challenge_handler.dart';
 
 /// This class exposes methods that you use to communicate with the IBM MobileFirst Platform Server.
 class MFClient {
@@ -89,11 +89,12 @@ class MFClient {
   /// The [deviceDisplayName] is stored in the MobileFirst Server registration data.
   Future<void> setDeviceDisplayName(
       {@required String deviceDisplayName}) async {
-    final dynamic response = await _channel.invokeMethod(WLCLIENT_SETDEVICE_DISPLAYNAME,
+    final dynamic response = await _channel.invokeMethod(
+        WLCLIENT_SETDEVICE_DISPLAYNAME,
         <String, dynamic>{DEVICE_DISPLAYNAME: deviceDisplayName});
-        if(response is String){
+    if (response is String) {
       return response;
-    }else{
+    } else {
       final MFResponse mfResponse = MFResponse(mfResponse: response);
       throw mfResponse;
     }
@@ -103,9 +104,9 @@ class MFClient {
   Future<String> getDeviceDisplayName() async {
     final dynamic response =
         await _channel.invokeMethod(WLCLIENT_GETDEVICE_DISPLAYNAME);
-    if(response is String){
+    if (response is String) {
       return response;
-    }else{
+    } else {
       final MFResponse mfResponse = MFResponse(mfResponse: response);
       throw mfResponse;
     }
@@ -130,7 +131,8 @@ class MFClient {
   /// The certificates must be in DER format. When multiple certificates are pinned, a secured call is checked for a match with any one of the certificates
   Future<void> pinTrustedCertificatesPublicKey(
       {@required List<String> certificateFileNames}) async {
-    final Map response = await _channel.invokeMethod(WLCLIENT_CERTIFICATE_PINNING,
+    final Map response = await _channel.invokeMethod(
+        WLCLIENT_CERTIFICATE_PINNING,
         <String, dynamic>{CERTIFICATE_FILENAMES: certificateFileNames});
     final MFResponse mfResponse = MFResponse(mfResponse: response);
     if ((mfResponse.errorMsg?.isEmpty ?? true) ||

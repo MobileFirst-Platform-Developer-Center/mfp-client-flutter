@@ -4,7 +4,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
-import 'package:mobilefoundation/mobilefoundationresponse.dart';
+import 'package:mobilefoundation/mobilefoundation_response.dart';
 
 class MFResourceRequest {
   static const MethodChannel _channel =
@@ -99,8 +99,8 @@ class MFResourceRequest {
       {int timeout = 30000,
       String scope = "",
       String backendServiceName = ""}) {
-    if(Platform.isIOS){
-      timeout = (timeout/1000).round();
+    if (Platform.isIOS) {
+      timeout = (timeout / 1000).round();
     }
     _channel.invokeMethod(WLRESOURCEREQUEST_INIT, <String, dynamic>{
       UUID: _uuid,

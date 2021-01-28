@@ -1,4 +1,4 @@
-import 'package:mobilefoundation/securitycheckchallengehander.dart';
+import 'package:mobilefoundation/security_check_challenge_handler.dart';
 
 class UserLoginChallengeHandler extends SecurityCheckChallengeHandler {
   /// Constructs an SecurityCheckChallengeHandler for a specific security check.
