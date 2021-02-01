@@ -68,7 +68,7 @@ jobs:
     - name: Setup MobileFirst Server using Docker
       working-directory: ./mobilefoundation/tests_app
       run: |
-        brew cask install docker-toolbox
+        brew install --cask docker-toolbox
         docker-machine create --driver "virtualbox" TestApp
         eval "$(docker-machine env TestApp)"
         docker-machine ls
