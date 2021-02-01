@@ -44,7 +44,7 @@ Next, we will call obtainAccessToken method on a instance of **MFAuthorizationMa
 
 	MFAuthorizationManager authManager = new MFAuthorizationManager();
     authManager.obtainAccessToken().then((accessToken) {
-       print("Token is ----> " + accessToken.value);
+       print("Token is " + accessToken.value);
        setState(() {
          _result = "Successfully received token";
        });
@@ -61,6 +61,6 @@ Obtaining Access Token from MF Server is an asynchronous call, notice how `.then
 
 You will find detailed explanation of APIs and it's uses in the following links:
 
-1. [API Reference](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/api/)
+1. [API Reference](https://pub.dev/documentation/mobilefoundation/latest/)
 2. [Application Development](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/application-development/)
 	

@@ -1,7 +1,7 @@
 name: mobilefoundation
-description: A new flutter plugin project.
+description: Flutter Plugin for IBM Mobile Foundation. Supports iOS and Android Platforms
 version: 8.0.2021020108
-homepage: "http://mobilefirstplatform.ibmcloud.com"
+homepage: "https://github.com/MobileFirst-Platform-Developer-Center/mfp-client-flutter"
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 /// You must extend it to handle challenges sent by a security check.
 ///
 /// Example registering [UserLoginCH] challenge handler class for a [UserLogin] security check:
-/// 
+///
 /// class UserLoginChallengeHandler extends SecurityCheckChallengeHandler {
-/// 
+///
 ///   UserLoginChallengeHandler() : super(securityCheck: 'UserLogin');
-/// 
+///
 ///   @override
 ///   void handleChallenge(Map challenge) {
 ///     // Handle challenge
@@ -22,12 +22,12 @@ import 'package:flutter/foundation.dart';
 ///       this.cancel();
 ///     }
 ///   }
-/// 
+///
 ///   @override
 ///   void handleSuccess(Map success) {
 ///     // Handle success. Perhaps show a success message or do nothing.
 ///   }
-/// 
+///
 ///   @override
 ///   void handleFailure(Map error) {
 ///     // Handle failure. Perhaps, show a failure message or ask for credentials again.
