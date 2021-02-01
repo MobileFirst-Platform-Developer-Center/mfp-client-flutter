@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import "package:mobilefoundation/mobilefoundationauthorizationmanager.dart";
-import 'package:mobilefoundation/mobilefoundationclient.dart';
-import 'package:mobilefoundation/mobilefoundationresourcerequest.dart';
+import "package:mobilefoundation/authorization_manager.dart";
+import 'package:mobilefoundation/client.dart';
+import 'package:mobilefoundation/resource_request.dart';
 import 'package:tests_app/pinCodeChallengeHandler.dart';
 import "package:tests_app/userLoginChallengeHandler.dart";
 

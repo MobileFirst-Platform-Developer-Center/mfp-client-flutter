@@ -82,7 +82,8 @@ class LoginState extends State<Login> {
                                               color: Colors.white, width: 1),
                                         ),
                                       ),
-                                      validator: (value) {
+                                      // ignore: missing_return
+                                      validator: (value){
                                         if (value.isEmpty) {
                                           return 'Please enter a valid ID';
                                         }
@@ -116,6 +117,7 @@ class LoginState extends State<Login> {
                                             borderSide: BorderSide(
                                                 color: Colors.white, width: 1),
                                           )),
+                                      // ignore: missing_return
                                       validator: (value) {
                                         if (value.isEmpty) {
                                           return 'Please enter valid password';

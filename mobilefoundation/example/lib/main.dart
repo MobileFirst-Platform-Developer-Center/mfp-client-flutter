@@ -1,12 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-import 'package:mobilefoundation/authorization_manager.dart';
-import 'package:mobilefoundation/client.dart';
-import 'package:mobilefoundation/resource_request.dart';
-import 'package:mobilefoundation/logger.dart';
-import 'package:mobilefoundation_example/userLoginChallengeHandler.dart';
 import './pages/BestBankRoot.dart';
 
 void main() => runApp(RootApp());

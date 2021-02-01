@@ -1,12 +1,10 @@
-import 'package:mobilefoundation/securitycheckchallengehander.dart';
+import 'package:mobilefoundation/security_check_challenge_handler.dart';
 
 class PinCodeChallengeHandler extends SecurityCheckChallengeHandler {
   PinCodeChallengeHandler() : super(securityCheck: 'PinCodeAttempts');
 
   @override
   void handleChallenge(Map challenge) {
-    // TODO: implement handleChallenge
-
     Map credentials = new Map();
     credentials['pin'] = '1234';
     if (credentials != null) {
@@ -18,13 +16,11 @@ class PinCodeChallengeHandler extends SecurityCheckChallengeHandler {
 
   @override
   void handleFailure(Map error) {
-    // TODO: implement handleFailure
     print(error);
   }
 
   @override
   void handleSuccess(Map identity) {
-    // TODO: implement handleSuccess
     print(identity);
   }
 }
