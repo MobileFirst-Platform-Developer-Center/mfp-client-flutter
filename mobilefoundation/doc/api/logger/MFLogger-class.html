@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the MFLogger class from the logger library, for the Dart programming language.">
+  <title>MFLogger class - logger library - Dart API</title>
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../static-assets/github.css">
+  <link rel="stylesheet" href="../static-assets/styles.css">
+  <link rel="icon" href="../static-assets/favicon.png">
+
+</head>
+
+<body data-base-href="../"
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">mobilefoundation</a></li>
+    <li><a href="../logger/logger-library.html">logger</a></li>
+    <li class="self-crumb">MFLogger class</li>
+  </ol>
+  <div class="self-name">MFLogger</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="../index.html">mobilefoundation</a></li>
+      <li><a href="../logger/logger-library.html">logger</a></li>
+      <li class="self-crumb">MFLogger class</li>
+    </ol>
+    
+    <h5>logger library</h5>
+    <ol>
+  <li class="section-title"><a href="../logger/logger-library.html#classes">Classes</a></li>
+  <li><a href="../logger/MFLogger-class.html">MFLogger</a></li>
+  <li><a href="../logger/MFLoggerLevel-class.html">MFLoggerLevel</a></li>
+
+
+
+
+
+
+
+
+</ol>
+
+  </div>
+
+  <div id="dartdoc-main-content" class="main-content">
+      <div><h1><span class="kind-class">MFLogger</span> class  </h1></div>
+
+    <section class="desc markdown">
+      <p>MFLogger is a class for logging that provides some enhanced capability such as capturing log calls, package filtering, 
+and log level control at both global and individual package scope.</p>
+<p>It also provides a method call to send captured logs to the IBM MobileFirst Platform server.</p>
+<p>Log file data is sent to the IBM MobileFirst Platform server when this class's send() method is called and the accumulated log size is greater than zero. 
+When the log data is successfully uploaded, the persisted local log data is deleted.</p>
+<p>When this Logger class's capture flag is turned on via setCapture(true) method call, 
+all messages passed through this class's log methods will be persisted to store in the following JSON object format:</p>
+<pre class="language-dart"><code>{
+  "timestamp"    : "17-02-2013 13:54:27:123",  // "dd-MM-yyyy hh:mm:ss:S"
+  "level"        : "ERROR",                    // FATAL || ERROR || WARN || INFO || LOG || DEBUG || TRACE
+  "package"      : "your_tag",                 // typically a class name, app name, or JavaScript object name
+  "msg"          : "the message",              // a helpful log message
+  "metadata"     : {"hi": "world"},            // (optional) additional JSON metadata, appended via doLog API call
+  "threadid"     : long                        // (optional) id of the current thread
+}
+</code></pre>
+    </section>
+    
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="MFLogger" class="callable">
+          <span class="name"><a href="../logger/MFLogger/MFLogger.html">MFLogger</a></span><span class="signature">(<span class="parameter" id="-param-packageName">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">packageName</span>}</span>)</span>
+        </dt>
+        <dd>
+          Initializes logger with specified <code>packageName</code> <a href="../logger/MFLogger/MFLogger.html">[...]</a>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>         
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="packageName" class="property">
+          <span class="name"><a href="../logger/MFLogger/packageName.html">packageName</a></span>
+          <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>         
+        </dt>
+        <dd>
+           
+                  <div class="features">read / write</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span>         
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object. 
+                  <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="debug" class="callable">
+          <span class="name"><a href="../logger/MFLogger/debug.html">debug</a></span><span class="signature">(<wbr><span class="parameter" id="debug-param-message">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="debug-param-metadata"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">metadata</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Logs the <code>message</code> at <code>DEBUG</code> level with any optional <code>metadata</code> 
+                  
+</dd>
+        <dt id="error" class="callable">
+          <span class="name"><a href="../logger/MFLogger/error.html">error</a></span><span class="signature">(<wbr><span class="parameter" id="error-param-message">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="error-param-metadata"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">metadata</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Logs the <code>message</code> at <code>ERROR</code> level with any optional <code>metadata</code> 
+                  
+</dd>
+        <dt id="info" class="callable">
+          <span class="name"><a href="../logger/MFLogger/info.html">info</a></span><span class="signature">(<wbr><span class="parameter" id="info-param-message">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="info-param-metadata"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">metadata</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Logs the <code>message</code> at <code>INFO</code> level with any optional <code>metadata</code> 
+                  
+</dd>
+        <dt id="log" class="callable">
+          <span class="name"><a href="../logger/MFLogger/log.html">log</a></span><span class="signature">(<wbr><span class="parameter" id="log-param-message">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="log-param-metadata"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">metadata</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Logs the <code>message</code> at <code>VERBOSE</code> level with any optional <code>metadata</code> 
+                  
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a string representation of this object. 
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="trace" class="callable">
+          <span class="name"><a href="../logger/MFLogger/trace.html">trace</a></span><span class="signature">(<wbr><span class="parameter" id="trace-param-message">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="trace-param-metadata"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">metadata</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Logs the <code>message</code> at <code>TRACE</code> level with any optional <code>metadata</code> 
+                  
+</dd>
+        <dt id="warn" class="callable">
+          <span class="name"><a href="../logger/MFLogger/warn.html">warn</a></span><span class="signature">(<wbr><span class="parameter" id="warn-param-message">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, </span><span class="parameter" id="warn-param-metadata"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a></span> <span class="parameter-name">metadata</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Logs the <code>message</code> at <code>WARN</code> level with any optional <code>metadata</code> 
+                  
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          The equality operator. <a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+    <section class="summary offset-anchor" id="static-methods">
+      <h2>Static Methods</h2>
+      <dl class="callables">
+        <dt id="getCapture" class="callable">
+          <span class="name"><a href="../logger/MFLogger/getCapture.html">getCapture</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns whether the Logging is enabled or not 
+                  
+</dd>
+        <dt id="getLevel" class="callable">
+          <span class="name"><a href="../logger/MFLogger/getLevel.html">getLevel</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the current Logger level. 
+                  
+</dd>
+        <dt id="getMaxFileSize" class="callable">
+          <span class="name"><a href="../logger/MFLogger/getMaxFileSize.html">getMaxFileSize</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the current setting for the maximum file size threshold. 
+                  
+</dd>
+        <dt id="send" class="callable">
+          <span class="name"><a href="../logger/MFLogger/send.html">send</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Sends the accumulated log data when the persistent log buffer exists and is not empty. 
+                  
+</dd>
+        <dt id="setCapture" class="callable">
+          <span class="name"><a href="../logger/MFLogger/setCapture.html">setCapture</a></span><span class="signature">(<wbr><span class="parameter" id="setCapture-param-flag">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">flag</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Turns logging on or off globally. 
+                  
+</dd>
+        <dt id="setLevel" class="callable">
+          <span class="name"><a href="../logger/MFLogger/setLevel.html">setLevel</a></span><span class="signature">(<wbr><span class="parameter" id="setLevel-param-level">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">level</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Sets the level and above at which log messages should be saved/printed. 
+                  
+</dd>
+        <dt id="setMaxFileSize" class="callable">
+          <span class="name"><a href="../logger/MFLogger/setMaxFileSize.html">setMaxFileSize</a></span><span class="signature">(<wbr><span class="parameter" id="setMaxFileSize-param-bytes">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">bytes</span>}</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Sets the maximum size of the local log file. <a href="../logger/MFLogger/setMaxFileSize.html">[...]</a>
+                  
+</dd>
+        <dt id="updateConfigFromServer" class="callable">
+          <span class="name"><a href="../logger/MFLogger/updateConfigFromServer.html">updateConfigFromServer</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          Reads the log configuration from the Mobile Foundation server and applies it to the logger. 
+                  
+</dd>
+      </dl>
+    </section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <ol>
+
+    <li class="section-title"><a href="../logger/MFLogger-class.html#constructors">Constructors</a></li>
+    <li><a href="../logger/MFLogger/MFLogger.html">MFLogger</a></li>
+
+
+    <li class="section-title">
+      <a href="../logger/MFLogger-class.html#instance-properties">Properties</a>
+    </li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></li>
+    <li><a href="../logger/MFLogger/packageName.html">packageName</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></li>
+
+    <li class="section-title"><a href="../logger/MFLogger-class.html#instance-methods">Methods</a></li>
+    <li><a href="../logger/MFLogger/debug.html">debug</a></li>
+    <li><a href="../logger/MFLogger/error.html">error</a></li>
+    <li><a href="../logger/MFLogger/info.html">info</a></li>
+    <li><a href="../logger/MFLogger/log.html">log</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/toString.html">toString</a></li>
+    <li><a href="../logger/MFLogger/trace.html">trace</a></li>
+    <li><a href="../logger/MFLogger/warn.html">warn</a></li>
+
+    <li class="section-title inherited"><a href="../logger/MFLogger-class.html#operators">Operators</a></li>
+    <li class="inherited"><a href="https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html">operator ==</a></li>
+
+
+
+    <li class="section-title"><a href="../logger/MFLogger-class.html#static-methods">Static methods</a></li>
+    <li><a href="../logger/MFLogger/getCapture.html">getCapture</a></li>
+    <li><a href="../logger/MFLogger/getLevel.html">getLevel</a></li>
+    <li><a href="../logger/MFLogger/getMaxFileSize.html">getMaxFileSize</a></li>
+    <li><a href="../logger/MFLogger/send.html">send</a></li>
+    <li><a href="../logger/MFLogger/setCapture.html">setCapture</a></li>
+    <li><a href="../logger/MFLogger/setLevel.html">setLevel</a></li>
+    <li><a href="../logger/MFLogger/setMaxFileSize.html">setMaxFileSize</a></li>
+    <li><a href="../logger/MFLogger/updateConfigFromServer.html">updateConfigFromServer</a></li>
+
+</ol>
+
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    mobilefoundation
+      0.0.1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../static-assets/typeahead.bundle.min.js"></script>
+<script src="../static-assets/highlight.pack.js"></script>
+<script src="../static-assets/script.js"></script>
+
+
+</body>
+
+</html>
