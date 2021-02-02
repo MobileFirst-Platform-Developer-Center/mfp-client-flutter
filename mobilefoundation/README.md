@@ -2,7 +2,7 @@
 # IBM Mobile Foundation Flutter Plugin
 
 ---
-To add IBM MobileFirst™ Platform Foundation capabilities to an existing **Flutter** app, you add the *mobilefoundation* plug-in to your app. The *flutter_ibm_mobilefirst* plug-in contains the IBM MobileFirst Platform Foundation SDK.
+To add IBM MobileFirst™ Platform Foundation capabilities to an existing **Flutter** app, you add the *mobilefoundation* plug-in to your app. The *mobilefoundation* plug-in contains the IBM MobileFirst Platform Foundation SDK.
 
 ### How to install?
 
