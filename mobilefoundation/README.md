@@ -14,7 +14,7 @@ Follow these steps to install the plugin to your existing Flutter App:
 
 	```
 	dependencies:
-	  flutter_ibm_mobilefirst: ^8.0.2020120110
+	  mobilefoundation: ^8.0.2021020113
 	```
 2. Install it
 	
