@@ -113,7 +113,11 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">void debug({@required String message, Map metadata}) async {
-  _channel.invokeMethod(LOGGER_DEBUG,&lt;String, dynamic&gt;{PACKAGE_NAME: this.packageName, MESSAGE: message, METADATA: metadata});
+  _channel.invokeMethod(LOGGER_DEBUG, &lt;String, dynamic&gt;{
+    PACKAGE_NAME: this.packageName,
+    MESSAGE: message,
+    METADATA: metadata
+  });
 }</code></pre>
     </section>
 
@@ -127,7 +131,7 @@
 <footer>
   <span class="no-break">
     mobilefoundation
-      0.0.1
+      8.0.2021020207
   </span>
 
 </footer>

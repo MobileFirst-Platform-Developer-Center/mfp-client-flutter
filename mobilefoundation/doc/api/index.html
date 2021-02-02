@@ -26,7 +26,7 @@
 <header id="title">
   <button id="sidenav-left-toggle" type="button">&nbsp;</button>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="http://mobilefirstplatform.ibmcloud.com">mobilefoundation package</a></li>
+    <li><a href="https://github.com/MobileFirst-Platform-Developer-Center/mfp-client-flutter">mobilefoundation package</a></li>
   </ol>
   <div class="self-name">mobilefoundation</div>
   <form class="search navbar-right" role="search">
@@ -44,7 +44,7 @@
     </header>
     
     <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-      <li><a href="http://mobilefirstplatform.ibmcloud.com">mobilefoundation package</a></li>
+      <li><a href="https://github.com/MobileFirst-Platform-Developer-Center/mfp-client-flutter">mobilefoundation package</a></li>
     </ol>
     
     <h5 class="hidden-xs"><span class="package-name">mobilefoundation</span> <span class="package-kind">package</span></h5>
@@ -64,7 +64,7 @@
       <section class="desc markdown">
         <h1 id="ibm-mobile-foundation-flutter-plugin">IBM Mobile Foundation Flutter Plugin</h1>
 <hr>
-<p>To add IBM MobileFirst™ Platform Foundation capabilities to an existing <strong>Flutter</strong> app, you add the <em>flutter_ibm_mobilefirst</em> plug-in to your app. The <em>flutter_ibm_mobilefirst</em> plug-in contains the IBM MobileFirst Platform Foundation SDK.</p>
+<p>To add IBM MobileFirst™ Platform Foundation capabilities to an existing <strong>Flutter</strong> app, you add the <em>mobilefoundation</em> plug-in to your app. The <em>mobilefoundation</em> plug-in contains the IBM MobileFirst Platform Foundation SDK.</p>
 <h3 id="how-to-install">How to install?</h3>
 <p>Follow these steps to install the plugin to your existing Flutter App:</p>
 <ol>
@@ -72,7 +72,7 @@
 <p>Depend on it:</p>
 <p>Add this to your package's pubspec.yaml file:</p>
 <pre class="language-dart"><code> dependencies:
-   flutter_ibm_mobilefirst: ^8.0.2020120110
+   mobilefoundation: ^8.0.2021020113
 </code></pre>
 </li>
 <li>
@@ -84,19 +84,19 @@
 <li>
 <p>Import it</p>
 <p>Now in your Dart code, you can use:</p>
-<pre class="language-dart"><code> import 'package: flutter_ibm_mobilefirst/client.dart';
+<pre class="language-dart"><code> import 'package: mobilefoundation/client.dart';
 </code></pre>
 </li>
 </ol>
 <h3 id="how-to-use-it">How to use it?</h3>
-<p>Let's see how can we get an Access Token using <em>flutter_ibm_mobilefirst</em> plugin.</p>
+<p>Let's see how can we get an Access Token using <em>mobilefoundation</em> plugin.</p>
 <p>First we will import <code>authorization_manager.dart</code> file into our App.</p>
-<pre class="language-dart"><code>import 'package: flutter_ibm_mobilefirst/authorization_manager.dart';
+<pre class="language-dart"><code>import 'package: mobilefoundation/authorization_manager.dart';
 </code></pre>
 <p>Next, we will call obtainAccessToken method on a instance of <strong>MFAuthorizationManager</strong></p>
 <pre class="language-dart"><code>MFAuthorizationManager authManager = new MFAuthorizationManager();
 authManager.obtainAccessToken().then((accessToken) {
-   print("Token is ----&gt; " + accessToken.value);
+   print("Token is " + accessToken.value);
    setState(() {
      _result = "Successfully received token";
    });
@@ -112,7 +112,7 @@ authManager.obtainAccessToken().then((accessToken) {
 <h3 id="documentation">Documentation:</h3>
 <p>You will find detailed explanation of APIs and it's uses in the following links:</p>
 <ol>
-<li><a href="https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/api/">API Reference</a></li>
+<li><a href="https://pub.dev/documentation/mobilefoundation/latest/">API Reference</a></li>
 <li><a href="https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/application-development/">Application Development</a></li>
 </ol>
       </section>
@@ -175,7 +175,7 @@ authManager.obtainAccessToken().then((accessToken) {
 <footer>
   <span class="no-break">
     mobilefoundation
-      0.0.1
+      8.0.2021020207
   </span>
 
 </footer>
