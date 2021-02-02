@@ -2,7 +2,7 @@
 # IBM Mobile Foundation Flutter Plugin
 
 ---
-To add IBM MobileFirst™ Platform Foundation capabilities to an existing **Flutter** app, you add the *flutter_ibm_mobilefirst* plug-in to your app. The *flutter_ibm_mobilefirst* plug-in contains the IBM MobileFirst Platform Foundation SDK.
+To add IBM MobileFirst™ Platform Foundation capabilities to an existing **Flutter** app, you add the *mobilefoundation* plug-in to your app. The *flutter_ibm_mobilefirst* plug-in contains the IBM MobileFirst Platform Foundation SDK.
 
 ### How to install?
 
@@ -29,16 +29,16 @@ Follow these steps to install the plugin to your existing Flutter App:
 	Now in your Dart code, you can use: 
 	
 	```
-	import 'package: flutter_ibm_mobilefirst/client.dart';
+	import 'package: mobilefoundation/client.dart';
 	```
 	
 ### How to use it?
 
-Let's see how can we get an Access Token using *flutter\_ibm\_mobilefirst* plugin.
+Let's see how can we get an Access Token using *mobilefoundation* plugin.
 
 First we will import `authorization_manager.dart` file into our App.
 
-	import 'package: flutter_ibm_mobilefirst/authorization_manager.dart';
+	import 'package: mobilefoundation/authorization_manager.dart';
 
 Next, we will call obtainAccessToken method on a instance of **MFAuthorizationManager**
 
