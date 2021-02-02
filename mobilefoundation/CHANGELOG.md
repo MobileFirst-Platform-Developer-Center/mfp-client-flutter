@@ -5,3 +5,7 @@
 ## 8.0.2021020113
 
 * Minor fixes for better package insights
+
+## 8.0.2021020207
+
+* Updated readme
