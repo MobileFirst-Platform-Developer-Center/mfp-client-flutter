@@ -46,12 +46,12 @@ Next, we will call obtainAccessToken method on a instance of **MFAuthorizationMa
     authManager.obtainAccessToken().then((accessToken) {
        print("Token is " + accessToken.value);
        setState(() {
-         _result = "Successfully received token";
+         _result = "Successfully received access token";
        });
     }).catchError((error) {
        print("Error in obtain access token. Reason: " + error.toString());
        setState(() {
-         _result = "Failed to fetch token";
+         _result = "Failed to fetch access token";
        });
     });
 	
